@@ -1,0 +1,228 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/nhtm/taglibs.nhtm"%>
+<html>
+<head>
+<c:import charEncoding="GBK" url="/WEB-INF/nhtm/IncludedSheetTitle.nhtm"/>
+<%@ page import="java.util.*,java.math.*"%>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="<c:url value="/js/jquery/jquery-1.5.2.min.js"/>"></script>
+<object id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+   <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0 
+			   pluginspage="<c:url value="/jsp/print/lodop/install_lodop32.exe"/>"></embed>
+</object>
+<script type="text/javascript" src="<c:url value="/jsp/print/js/LodopFuncs.js"/>"></script>
+<script>var contextPath = "<%=request.getContextPath()%>";</script>
+<style>
+    *{ padding: 0; margin: 0;}
+    body{font-size: 14px; }
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    .content{
+        width: 730px;
+        margin: 10px auto 20 auto;
+        border: 1px solid #000;
+        padding: 10px;
+    }
+    .head-con{
+    	height:70px;
+    	margin-bottom:10px;
+    }
+    .head-con,.f-tabel{
+        border-bottom: 1px solid #000;
+    }
+    .table thead{
+        background: #cccccc;
+    }
+    .table td,.table th{
+        border:1px solid #000;
+        text-align: center;
+    }
+    .table caption h3{
+    	margin-top:5px;
+    	margin-bottom:5px;
+    }
+  
+	td{
+		padding:1px;
+	}
+	.mybutton-group{
+		border:0px solid #000000;
+		padding:10px; 
+		width:730px;
+		margin:0 auto;
+		page-break-after: always;
+	}
+	.btn {
+	    display: inline-block;
+	    width: 100px;
+	    height: 26px;
+	    line-height: 26px;
+	    font-size: 16px;
+	    color: #ffffff;
+	    background: #287EE5;
+	    padding: 0;
+	    text-align: center;
+	    border-radius: 30px;
+	    margin: 5px;
+	    cursor: pointer;
+	    cursor: hand;
+	    text-decoration: none;
+	}
+</style>
+</head>
+<body>
+	<c:import charEncoding="GBK" url="/WEB-INF/nhtm/IncludedSheetHeader.nhtm"/>
+	<div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			<div class="main-content">
+				<div class="page-content">
+					<div class="row">
+						<div class="col-xs-12">
+							<form id="packingForm" method="post" action="">
+								<div class="row">
+									<!-- 按钮 -->
+									<div class="button_group" style="border:0px solid #000000; padding:10px; width:730px; margin:0 auto;page-break-after: always;">
+										<div class="">
+											<!-- <a class="btn" onclick="javascript:OperateLink('[CT按钮:修改]','修改');return false;">修改</a> -->
+											<a class="btn" onclick="upd()">修改</a>
+											<a class="btn" onclick="printOrder();">生成图片</a>
+											<a class="btn" onclick="createPDF()">生成PDF</a>
+											<a class="btn" onclick="btn_return();">返回</a>
+										</div>
+									</div>
+									<c:set var="pageName_0" value="/jsp/print/AttachedFile_0"></c:set>		
+									<c:set var="pageName_1" value="/jsp/print/AttachedFile_1"></c:set>
+									<c:set var="pageName_2" value="/jsp/print/AttachedFile_2"></c:set>
+									<c:set var="pageName_3" value="/jsp/print/AttachedFile_3"></c:set>
+                                    <c:set var="printDate" value="<%=new Date() %>" scope="request"></c:set>	
+									
+									<div class="warp" style="float:left;">
+									<!--添加中文字体，用于显示中文，并且包含在class为warp的div内  -->
+									<style>
+								        body{
+								            font-family:SimHei;
+								        }
+								        @page{
+								        	size:a4;
+								        	margin:0;
+								        }
+								        .col-xs-12{
+								        	height: 29.6cm;
+								        }
+								    </style>
+									<c:forEach var="order" items="${main.DataBand_D_MAIN}"  varStatus="status">
+										<c:set var="order" value="${order}" scope="request"></c:set>
+										<c:set var="detail" value="${main.DataBand_D_DEATAIL}" scope="request"></c:set>
+									
+										<c:forEach var="check" items="${main.CV_PARAMMAP.PARAM_par_files}"  varStatus="statuss">
+											<c:if test="${check ==1}">
+												<div class="col-xs-12" mark="print_orders" id="${order.ID}_0">																							  
+													<jsp:include page="${pageName_3}.nhtm" flush="true"></jsp:include>
+												</div>
+											</c:if>
+											<c:if test="${check ==2}">
+											<div class="col-xs-12" mark="print_orders" id="${order.ID}_1">																													  
+											<jsp:include page="${pageName_1}.nhtm" flush="true"></jsp:include>
+											</div>
+											</c:if>
+											<c:if test="${check ==3}">
+											<div class="col-xs-12" mark="print_orders" id="${order.ID}_2">				  
+											<jsp:include page="${pageName_0}.nhtm" flush="true"></jsp:include>
+											</div>
+											</c:if>
+											 
+											<c:if test="${check ==5}">
+											<div class="col-xs-12" mark="print_orders" id="${order.ID}_3">							  
+											<jsp:include page="${pageName_3}.nhtm" flush="true"></jsp:include>
+											</div>
+											</c:if>
+											 
+										</c:forEach>								
+									</c:forEach>
+									</div>	
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<!-- /.page-content -->
+			</div>
+			<!-- /.main-content -->
+		</div>
+	</div>
+	<div id="printHtml" style="display:none;border:1px solid red"></div>
+	<c:import charEncoding="GBK" url="/WEB-INF/nhtm/IncludedSheetFooter.nhtm"/>
+</body>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+	 var ctcontent = window.parent.document.getElementById("ctcontent");
+		ctcontent.height =ctcontent.contentWindow.document.body.scrollHeight; 
+		setTimeout(printOrder,500);
+
+	}); 
+	
+   function printOrder(){
+		var PrinterName = 'RICOH Aficio 1027 PCL 5';
+		var exeUrl = '<c:url value="/jsp/print/lodop/"/>'
+		var lodop = initLodop('LODOP_OB','LODOP_EM',exeUrl);
+		creagePrintPage(lodop);
+   }
+   
+   function creagePrintPage(lodop){
+	   var divs = $(document).find('div[mark=print_orders]');
+	   var html = '';
+	   
+	   for(var i=0;i<divs.size();i++){
+	       html = divs.eq(i).html();
+		     var filePath="D:/WTD_EIE/SFDZ/"+ divs.eq(i).attr('id')+".jpg";
+           
+			 lodop.ADD_PRINT_HTM(5,5,"100%","100%",html);
+			 lodop.SET_PRINT_STYLEA(0,"Horient",3);
+			 lodop.SET_PRINT_STYLEA(0,"Vorient",3);
+             lodop.SET_SAVE_MODE("FILE_PROMPT",false);
+             lodop.SAVE_TO_FILE(filePath);
+	   }
+	   lodop.PRINT_INIT("开始打印");
+	   //$(parent.document).find('#printHtml').html(html);
+	   //lodop.SET_PRINTER_INDEX(1);
+	   //lodop.ADD_PRINT_TABLE(50,10,"50%",220,html);
+	   
+	   //lodop.SET_SHOW_MODE('HIDE_PAPER_BOARD',0);
+	   // lodop.SET_PRINT_STYLEA(0,"border",16);
+	   //lodop.SET_PRINT_PAGESIZE(2,0,0,"A4");
+	   //lodop.PREVIEW();
+	   //lodop.PRINT();
+	   parent.window.close();
+   }
+   
+   function initLodop(objectid,embedid,exeUrl){
+         return LODOP=getLodop(document.getElementById(objectid),document.getElementById(embedid),exeUrl);
+   }
+   
+   function closewindow(){
+      parent.window.close();
+   }
+    function btn_return(){
+      window.location.href="<c:url value='/ct/viewCtcontent.nx?cvId=13243&ctAction=View&itemId=1&readDataCache=1'/>";
+   }
+    
+   function upd(){
+	   var file = '${main.CV_PARAMMAP.PARAM_par_files}';
+	   var vid = '${main.ID}';
+	   //alert(file);
+	   window.location.href="<c:url value='/ct/viewCtcontent.nx?ctAction=Modify&cvId=15505&itemId="+vid+"&AddParam=par_files:"+file+"&readDataCache=1'/>";
+   }
+   //生成PDF文件
+   function createPDF(){
+	   var file = '${main.CV_PARAMMAP.PARAM_par_files}';
+	   var vid = '${main.ID}';
+	   window.location.href="<c:url value='/ConvertPDF.nx?cvId=15505&itemId="+vid+"&par_files="+file+"&readDataCache=1'/>"; 
+   }
+    
+
+</script>
+</html>

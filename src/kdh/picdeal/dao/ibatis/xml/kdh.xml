@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="kdh"> 	
+     <resultMap id="resultMap_GetKdhImgList" class="java.util.HashMap">
+		<result column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+		<result column="fileName" property="fileName" jdbcType="VARCHAR"  javaType="java.lang.String" />
+		<result column="fileblob" property="fileblob" jdbcType="BLOB" />
+	</resultMap>
+  <select id="GetKdhImgList" resultMap="resultMap_GetKdhImgList">
+     <![CDATA[
+      select b.CT_WS客带货申报_ATTID id, b.fileblob,b.fileName
+       from  CT_WS客带货申报_ATT b
+     where b.CT_WS客带货申报_ATTID=#itemId#
+   ]]>
+  </select>		
+  
+  <select id="GetQyImgList" resultMap="resultMap_GetKdhImgList">
+     <![CDATA[
+      select b.CT_WS企业信息_ATTACHID id, b.fileblob,b.fileName
+       from  CT_WS企业信息_ATTACH b
+     where b.CT_WS企业信息_ATTACHID=#itemId#
+   ]]>
+  </select>	
+</sqlMap>

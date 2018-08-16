@@ -1,0 +1,257 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/nhtm/taglibs.nhtm"%>
+<html>
+<head>
+    <title></title>
+</head>
+<body style="text-align: center;  font-size: 14px;">
+<div style="position: relative;width: 740px;margin: 0 20px;margin-top: 20px;text-align:center;">
+    <div style="line-height: 20px;">
+        <h2>代理报关委托书</h2>
+
+        <p style="text-align: right;"> 编号：<span style="color:red">10277380811</span></p>
+
+        <p style="text-align: left;text-indent: 6rem;">威时沛运货运（广州）有限公司</p>
+
+        <p style="text-align: left;text-indent: 2rem;">我单位现 <span>A</span>（A逐票、B长期）委托贵公司代理  <span>A</span>
+                   等相关事宜（A、填单申报  B、辅助查验 C、垫缴税款  D、办理海关证明联 E、审批手册 F、核销手册 G、申办减免税手续 H、其他）详见《委托报关协 ）
+                    议》。 </p>
+        <p style="text-align: left;text-indent: 2rem;"> 我单位保证遵守 《海关法》 和国家有关法规， 保证所提供的情况真实、完整、单证相符， 无侵犯他
+            人知识产权的行为。否则，愿承担法律责任。
+        </p>
+
+        <p style="text-align: left;text-indent: 2rem;">本委托书有效期自签字之日起至<label>2017年 12 月 30日</label>止。
+        </p>
+
+        <p style="margin-top: 50px">
+            法定代表人或其授权人签署 《代理报关委托书》 的人（签字） 林立
+        </p>
+
+        <p  style="text-align: right;">${order.当前日期}</p><!-- 2017年3月28日 -->
+
+        <h1>委 托 报 关 协 议</h1>
+
+        <p style="text-align: left;text-indent: 2rem;line-height:3rem">为明确委托报关具体事项和各自责任，双方经平等协商签定协议如下：</p>
+        <div style="position: absolute;top: 18%;right:15%"><img src="../jsp/print/images/1.png" transcolor="#FFFFFF"></div>
+    </div>
+	<c:set var="count" value="0" scope="request"></c:set>
+	<c:forEach var="orderInfo" items="${detail}"  varStatus="status">
+	<c:if test="${order.ID == orderInfo.PID && count == 0}">
+    <div style=" width: 100%;height: auto;float: left;">
+        <div style="position: relative; width: 45%;float: left;">
+            <table style="width: 100%; border-collapse: collapse;border: 1px solid #000;font-size:10px;text-align:center;">
+                <tbody>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        委托方
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+         广州沣通益贸易有限公司
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        主要货物名称
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        ${orderInfo.DESCRIPTION}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        HS编码
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        ${orderInfo.HSCODE}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        货物总值
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        US$${orderInfo.AMOUNT}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        进出口日期
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+                         ${order.INOUTDATE}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        提单号
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        ${order.BILLOFLADING}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        贸易方式
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+         ${order.监管方式}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        原产地/货源地
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+         ${order.货源地区}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="height: 90px;vertical-align:top;padding-top: 10px;border: 1px solid #000;">
+                        <p style="text-align: left;">其他要求：</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="height: 60px;text-align: left;border: 1px solid #000;vertical-align: text-top;padding:6px">
+                        <p style="text-align: left;">背面所列通用条款是本协议不可分割的一部分，对本协议的签署构成了对背面通用条款的同意
+                        </p>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="2" style="height: 100px;vertical-align:top;padding-top: 10px">
+                        <p style="text-align: left;text-indent: 2rem;"> 委托方业务签章</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        经办人签章：
+                    </td>
+                    <td>
+                        林立
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        联系电话
+                    </td>
+                    <td>
+                        ${order.当前日期}
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+            <div style="position: absolute;top: 60%;right:15%"><img src="../jsp/print/images/1.png" transcolor="#FFFFFF"></div>
+        </div>
+		<c:set var="count" value="${count+1}" scope="request"></c:set>
+		</c:if>
+       </c:forEach>
+        <div style="position: relative;width: 45%;float: right;">
+            <table style="width: 100%; border-collapse: collapse;border: 1px solid #000;font-size:10px;text-align:center;">
+                <tbody>
+                <tr>
+                    <td style="width:35%;border: 1px solid #000;height: 24px;">
+                        被委托方
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000;height: 24px;">
+                        威时沛运
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;" style="border: 1px solid #000;height: 24px;">
+                        *报关单编码
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000;height: 24px;">
+						${order.CUSTOMSDECLARATION}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        收单单证日期
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000;height: 24px;">
+                        ${order.当前日期}
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4" style="border: 1px solid #000;height: 24px;">
+                        收到单证情况
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        合同□
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        发票□√
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        装箱清单□√
+                    </td>
+                    <td>
+                        提（运）单□√
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;white-space: nowrap;">
+                        加工贸易手册□
+                    </td>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        许可证件□
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="border: 1px solid #000;height: 24px;text-align:left;padding:6px">
+                        其他
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;height: 24px;">
+                        报关收费
+                    </td>
+                    <td colspan="2" style="border: 1px solid #000;height: 24px;">
+                  
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height: 90px;vertical-align:top;padding-top: 10px">
+                        <p style="text-align: left;">承诺说明：</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="height: 60px;border: 1px solid #000;vertical-align: text-top;padding:6px">
+                        <p style="text-align: left;"> 背面所列通用条款是本协议不可分割的一部分，对本协议的签署构成了对背面通用条款的同意</p>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="3" style="height: 100px;vertical-align:top;padding-top: 10px">
+                        <p style="text-align: left;"> 被委托方业务签章</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="white-space: nowrap;">
+                        经办报关员签章：
+                    </td>
+                    <td></td>
+                    <td>胡俊超</td>
+                </tr>
+                <tr>
+                    <td>
+                        联系电话
+                    </td>
+                    <td></td>
+                    <td> ${order.当前日期}</td>
+                </tr>
+                </tfoot>
+            </table>
+            <div style="position: absolute;top: 70%;right:15%"><img src="../jsp/print/images/2.png" transcolor="#FFFFFF"></div>
+        </div>
+    </div>
+    <div style="width: 100%;height: auto;float: left;margin-top: 20px;">
+        <p>（白联：海关留存、黄联：被委托方留存、红联：委托方留存）</p>
+    </div>
+</div>
+</body>
+</html>

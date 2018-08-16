@@ -1,0 +1,100 @@
+<%@page contentType="text/html;charset=gbk"%>
+<%@ include file="/WEB-INF/nhtm/taglibs.nhtm"%>
+<html>
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<c:import charEncoding="GBK" url="/WEB-INF/nhtm/IncludedSheetTitle.nhtm" />
+<c:import charEncoding="gbk" url="/jsp/share/includedCommon.nhtm" />
+<%@ page import="java.util.*,java.math.*"%>
+<script language="JavaScript">
+//<!--
+
+//-->
+</script>
+</head>
+<body>
+	<form id="__Sheet" name="__Sheet" action="viewCtcontent.nx"
+		method="post">
+		<c:import charEncoding="GBK"
+			url="/WEB-INF/nhtm/IncludedEditableSheetHeader.nhtm" />
+
+		<c:set var="DDITEMS_RADIO_INDEX" value="0" />
+		<div class="content bgff p20">
+			<div class="table-con">
+				<table class="table mytable bs">
+					<tbody>
+						<tr>
+							<th width="10%">客户：</th>
+							<td width="15%"><input class="input-s input-sm" type="text"
+								id="main.客户" name="main.客户"
+								value="<c:out value="${main['客户']}" default=""/>"></td>
+							<th width="10%">编号：</th>
+							<td width="15%"><input class="input-s input-sm" type="text"
+								id="main.编号" name="main.编号"
+								value="<c:out value="${main['编号']}" default=""/>"></td>
+							<th width="10%">地址：</th>
+							<td width="15%"><input class="input-s input-sm" type="text"
+								id="main.地址" name="main.地址"
+								value="<c:out value="${main['地址']}" default=""/>"></td>
+							<th width="10%">日期：</th>
+							
+							<td width="15%"><input class="input-s input-sm" type="text"
+								value="<c:out value="${nsfn:fmtdate(main['日期'],'yyyy-MM-dd')}" default =""/>"
+								id="main.日期" name="main.日期"
+								onchange="javascript:DoCellPost(this,'日期','main','<c:out value="${main['Global_ID']}"/>')">
+								<c:if test="${ !usePtBorderWidth }">
+									<SCRIPT LANGUAGE="JavaScript">WriteDateSelector("main.日期","yyyy-MM-dd");</SCRIPT>
+								</c:if></td>
+						</tr>
+						<tr>
+							<th>装箱日期：</th>
+							<td><input class="input-s input-sm" type="text"
+								value="<c:out value="${nsfn:fmtdate(main['装箱日期'],'yyyy-MM-dd')}" default =""/>"
+								id="main.装箱日期" name="main.装箱日期"
+								onchange="javascript:DoCellPost(this,'装箱日期','main','<c:out value="${main['Global_ID']}"/>')">
+								<c:if test="${ !usePtBorderWidth }">
+									<SCRIPT LANGUAGE="JavaScript">WriteDateSelector("main.装箱日期","yyyy-MM-dd");</SCRIPT>
+								</c:if></td>
+							
+							<th>装箱客户：</th>
+							<td><input class="input-s input-sm" type="text"
+								id="main.装箱客户" name="main.装箱客户"
+								value="<c:out value="${main['装箱客户']}" default=""/>"></td>
+							<th>发票编号：</th>
+							<td><input class="input-s input-sm" type="text"
+								id="main.发票编号" name="main.发票编号"
+								value="<c:out value="${main['发票编号']}" default=""/>"></td>
+							<th>装箱地址：</th>
+							<td><input class="input-s input-sm" type="text"
+								id="main.装箱地址" name="main.装箱地址"
+								value="<c:out value="${main['装箱地址']}" default=""/>"></td>
+						</tr>
+						<tr>
+							<th>合约号：</th>
+							<td><input class="input-s input-sm" type="text"
+								id="main.合约号" name="main.合约号"
+								value="<c:out value="${main['合约号']}" default=""/>"></td>
+							<th>船名：</th>
+							<td><input class="input-s input-sm" type="text"
+								id="main.船名" name="main.船名"
+								value="<c:out value="${main['船名']}" default=""/>"></td>
+							<th>付款条件：</th>
+							<td><input class="input-s input-sm" type="text"
+								id="main.付款条件" name="main.付款条件"
+								value="<c:out value="${main['付款条件']}" default=""/>"></td>
+							<th>&nbsp;</th>
+							<td>&nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="mytable">
+				<tr>
+					<td style="text-align: center; height: 120px;">
+					<%@ include	file="/jsp/share/toolbarEdit.nhtm"%></td>
+				</tr>
+			</table>
+		</div>
+	</form>
+</body>
+</html>

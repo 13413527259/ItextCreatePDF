@@ -1,0 +1,92 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/nhtm/taglibs.nhtm"%>
+<html>
+<head>
+    <title></title>
+</head>
+<body style="text-align: center;  font-size: 14px;">
+<div style="position: relative;width: 740px;margin: 0 20px;margin-top: 20px;text-align:center;">
+	<div style="position: absolute;top: 65%;left:70%"><img style="z-index: 99;" src="../jsp/print/images/1.png" transcolor="#FFFFFF"></div>
+    <div>
+        <h2 style="line-height: 28px;">旅游购物商品出口清单</h2>
+    </div>
+    <table style="width: 100%; border-collapse: collapse;border: 1px solid #000;margin-top:20px;text-align:center;z-index: 1">
+        <tbody>
+        <tr>
+            <th colspan="2" style="border: 1px solid #000;height: 32px;">
+                报关单号：
+            </th>
+            <th style="border: 1px solid #000;height: 32px;">
+     ${order.CUSTOMSDECLARATION}          
+            </th>
+            <th style="border: 1px solid #000;height: 32px;">
+               提单号： 
+            </th>
+            <!-- <td colspan="2" style="border: 1px solid #000;height: 32px;"></td> -->
+            <th colspan="2" style="border: 1px solid #000;height: 32px;">
+      ${order.BILLOFLADING}
+            </th>
+            <th style="border: 1px solid #000;height: 32px;">
+                发货单位：
+            </th>
+            <th colspan="2" style="border: 1px solid #000;height: 32px;">
+      ${order.FORWARDINGUNIT}
+            </th>
+        </tr>
+       <!-- </thead>
+        <tbody>-->
+      
+			<tr>
+				<td style="border: 1px solid #000;height: 32px;">项号</td>
+				<td style="border: 1px solid #000;height: 32px;">序号</td>
+				<td style="border: 1px solid #000;height: 32px;">商品名称</td>
+				<td style="border: 1px solid #000;height: 32px;">规格型号</td>
+				<td colspan="2" style="border: 1px solid #000;height: 32px;">数量</td>
+				<td style="border: 1px solid #000;height: 32px;">货值</td>
+				<td style="border: 1px solid #000;height: 32px;">重量（千克）</td>
+			</tr>
+		<c:set var="count" value="0" scope="request"></c:set>
+		<c:forEach var="orderInfo" items="${detail}"  varStatus="status">
+		<c:if test="${order.ID == orderInfo.PID}">
+			<tr>
+			    
+				<td style="border: 1px solid #000;height: 32px;"><c:if test="${count == 0}">1</c:if></td>
+				<td style="border: 1px solid #000;height: 32px;">${count+1}</td>
+				<td style="border: 1px solid #000;height: 32px;">${orderInfo.DESCRIPTION}</td>
+				<td style="border: 1px solid #000;height: 32px;">${orderInfo.UNIT}</td>
+				<td style="border: 1px solid #000;height: 32px;width: 73px;">${orderInfo.WEIGHT}</td>
+				<td style="border: 1px solid #000;height: 32px;">千克</td>
+				<td style="border: 1px solid #000;height: 32px;">US$${orderInfo.AMOUNT}</td>
+				<td style="border: 1px solid #000;height: 32px;">${orderInfo.WEIGHT}千克</td>
+				<c:set var="count" value="${count+1}" scope="request"></c:set>
+			</tr>
+		</c:if>
+       </c:forEach>
+	    <c:forEach var="i"  begin="${count}" end="19" step="1">
+	       <tr>
+            <td style="border: 1px solid #000;height: 32px;"></td>
+            <td style="border: 1px solid #000;height: 32px;"></td>
+            <td style="border: 1px solid #000;height: 32px;"></td>
+            <td style="border: 1px solid #000;height: 32px;"></td>
+            <td style="border: 1px solid #000;height: 32px;"></td>
+			<td style="border: 1px solid #000;height: 32px;"></td>	
+			<td style="border: 1px solid #000;height: 32px;"></td>
+			<td style="border: 1px solid #000;height: 32px;"></td>
+		   </tr>
+	   </c:forEach>	
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="6" style="height: 40px">合计</td> 
+            <td>US$${order.TOTAL}</td>
+            <td style="border: 1px solid #000;height: 32px;">${order.GROSSWEIGHT}千克</td>
+        </tr>
+        </tfoot>
+    </table>
+    <div style="width: 100%;height: auto;float: left;margin-top: 20px;">
+	    <p>经营单位签章：</p>
+	</div>
+
+</div>
+</body>
+</html>

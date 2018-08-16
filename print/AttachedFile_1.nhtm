@@ -1,0 +1,228 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/nhtm/taglibs.nhtm"%>
+<div style="position: relative; width: 740px;margin: 0 20px;margin-top: 20px;text-align:center;">
+    <div style="line-height: 20px;">
+        <h3>${order.客户}</h3>
+        <p style="margin:6px 0">装箱单</p>
+    </div>
+    <table style="width: 100%;border-collapse: collapse;line-height: 20px;text-align:left;">
+        <tr>
+            <td width="60%" style="padding:6px 0" colspan="3">               
+              	 PACKING LIST
+            </td>
+             
+            <td width="12%">
+                <p style="margin:8px 0">日期:</p>
+
+                 <p style="margin:8px 0">Date:</p>
+            </td>
+             <td style="vertical-align: bottom;border-bottom: 1px solid #000;">
+                ${nsfn:fmtdate(main['装箱日期'],'yyyy-MM-dd')}
+            </td>
+        </tr>
+        <tr>
+            <td width="12%">
+                 <p style="margin:8px 0">客户:</p>
+
+                 <p style="margin:8px 0">ToMessrs:</p>
+            </td>
+             <td width="28%" style="vertical-align: bottom;border-bottom: 1px solid #000;" >
+                ${main.装箱客户}
+            </td>
+             <td width="20%" style="padding:6px 0">              
+            </td>
+             <td>
+                 <p style="margin:8px 0">发票编号:</p>
+
+                 <p style="margin:8px 0">Invoice NO:</p>
+            </td>
+             <td style="vertical-align: bottom;border-bottom: 1px solid #000;">
+                ${main.发票编号}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                 <p style="margin:8px 0">地址:</p>
+
+                 <p style="margin:8px 0">Address:</p>
+            </td>
+             <td style="vertical-align: bottom;border-bottom: 1px solid #000;" >
+                ${main.装箱地址}
+            </td>
+             <td style="padding:6px 0">                            
+            </td>
+            <td>
+                 <p style="margin:8px 0">合约号:</p>
+
+                 <p style="margin:8px 0">Contract No:</p>
+            </td>
+             <td style="vertical-align: bottom;border-bottom: 1px solid #000;">
+                ${main.合约号}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                 <p style="margin:8px 0">船名:</p>
+
+                 <p style="margin:8px 0;white-space: nowrap;">Shipped by:</p>
+            </td>
+            <td style="vertical-align: bottom;border-bottom: 1px solid #000;">
+                ${main.船名}
+            </td>
+             <td style="padding:6px 0" width="20%">
+                <p style="margin:8px 0;text-align:center">由 广州 至 ${order.DESTINATION}</p>
+         <p style="margin:8px 0;text-align:center">  to </p>
+                
+            </td>
+            <td>
+                 <p style="margin:8px 0">付款条件:</p>
+
+                 <p style="margin:8px 0;white-space: nowrap;">Termsof Payment:</p>
+            </td>
+             <td style="vertical-align: middle;border-bottom: 1px solid #000;">
+               	 ${main.付款条件}
+            </td>
+        </tr>
+    </table>
+    
+    <table style="width: 100%;border-collapse: collapse;border: 1px solid #000;line-height: 20px;text-align:center;margin-top:30px;">
+        <tbody>
+        <tr>
+            <td style="border: 1px solid #000;height: 32px;white-space: nowrap;">
+                箱号
+
+            </td>
+            <td style="width:20%; border: 1px solid #000;height: 32px;white-space: nowrap;padding:0 5px">
+                货物名称及规格
+
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                总箱数(件)
+
+            </td>
+            <td colspan="2" style="width:15%;border: 1px solid #000;height: 32px;" >
+                总数量
+
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                总毛重(kg)
+
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                总净重(kg)
+
+            </td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000;height: 32px;">
+
+                CtnNO.
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+
+              Description
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+
+                Ge.Crate
+            </td>
+            <td colspan="2" style="border: 1px solid #000;height: 32px;" >
+
+                Ge.Quantity
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+
+               G.W.:(kg)
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+
+                N.W.:(kg)
+            </td>
+        </tr>
+       <!-- </thead>
+        <tbody>-->
+        <c:set var="count" value="0" scope="request"></c:set>
+		<c:forEach var="orderInfo" items="${detail}"  varStatus="status">
+		 <c:if test="${order.ID == orderInfo.PID}">
+		  <tr>
+            <td style="border: 1px solid #000;height: 32px;">
+                ${count+1}
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                ${orderInfo.DESCRIPTION}
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                ${orderInfo.NUM}
+            </td>
+            <td style="border: 1px solid #000;height: 32px;width: 68px;">
+                ${orderInfo.WEIGHT}
+            </td>
+            <td style="border: 1px solid #000;height: 32px;width: 40px;">
+                ${orderInfo.DECLARINGUNITS}
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                ${orderInfo.WEIGHT}
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                ${orderInfo.MAOWEIGHT}
+            </td>
+		    <c:set var="count" value="${count+1}" scope="request"></c:set>	
+        </tr>
+       </c:if>
+	   </c:forEach>	
+	     <c:forEach var="i"  begin="${count}" end="15" step="1">
+	       <tr>
+            <td style="border: 1px solid #000;height: 32px;">
+                
+            </td>
+			 <td style="border: 1px solid #000;height: 32px;">
+                
+            </td>
+			 <td style="border: 1px solid #000;height: 32px;">
+               
+            </td>
+			 <td style="border: 1px solid #000;height: 32px;">
+                
+            </td>
+			 <td style="border: 1px solid #000;height: 32px;">
+                
+            </td>
+			 <td style="border: 1px solid #000;height: 32px;">
+                
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                
+            </td>
+			 </tr>
+	   </c:forEach>	
+     <!--   </tbody>
+        <tfoot>-->
+        <tr>
+            <td style="border: 1px solid #000;height: 32px;">
+                <p>合计</p>
+                <p>Total</p>
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                ${order.TOTALBOX}件
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+
+            </td>
+            
+            <td style="border: 1px solid #000;height: 32px;">
+                ${order.COUNTWEIGHT}千克
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                ${order.COUNTMAOWEIGHT}千克
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="position: absolute;top: 70%;right:15%"><img src="../jsp/print/images/1.png" transcolor="#FFFFFF"></div>
+</div>

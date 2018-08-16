@@ -1,0 +1,132 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/nhtm/taglibs.nhtm"%>
+<div style="position: relative;width: 740px;height: 29.6cm;margin: 0 20px;margin-top: 20px;text-align:center;">
+    <div style="line-height: 20px;">
+        <h3>${order.客户}</h3>
+
+        <p style="margin:6px 0">发&nbsp;&nbsp;&nbsp;&nbsp;票</p>
+
+        <p>INVOICE</p>
+    </div>
+    <table style="width: 100%;border-collapse: collapse;line-height: 20px;text-align:center;">
+        <tr>
+            <td width="25%" style="padding:5px 0">
+                 <p style="margin:6px 0;text-align: right;">客户(Sold to MAssers):</p>
+            </td>
+            <td style="width:25%;vertical-align: middle; border-bottom: 1px solid #000;">
+            ${main.客户}
+            </td>
+            <td width="25%">
+                 <p style="margin:6px 0;text-align: right;">编号(NO):</p>
+            </td>
+            <td style="vertical-align: middle; border-bottom: 1px solid #000;">
+            ${main.编号}
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:5px 0">
+                 <p style="margin:6px 0;text-align: right;">地址(Address):</p>
+            </td>
+           <td style="vertical-align: middle; border-bottom: 1px solid #000;">
+           ${main.地址}
+            </td>
+            <!-- <td style=" border-bottom: 1px solid #fff;"></td> -->
+            <td>
+                 <p style="margin:6px 0;text-align: right;">日期(DATE):</p>
+            </td>
+            <td style="vertical-align: middle; border-bottom: 1px solid #000;">
+            ${nsfn:fmtdate(main['日期'],'yyyy-MM-dd')}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding:6px 10px;vertical-align: middle;">
+            	<span>由(FROM) &nbsp;广州  &nbsp;至(TO) &nbsp;${order.DESTINATION}</span>         
+	            <%-- <table style="margin-top:20px;">
+	            	<tr>
+	            		<td>由</td>
+	            		<td>广州 </td>
+	            		<td>至 </td>
+	            		<td>${order.DESTINATION}</td>
+	           		</tr>
+	           		<tr>
+	            		<td>From</td>
+	            		<td> </td>
+	            		<td>to </td>
+	            		<td></td>
+	            	</tr>
+	            </table> --%>
+            </td>
+        </tr>
+    </table>
+    <table style="width: 100%; border-collapse: collapse;border: 1px solid #000;line-height: 20px;text-align:center;">
+        <tbody>
+        <tr>
+            <td width="20%" style="border: 1px solid #000;height: 32px;">
+                 <p style="margin:6px 0">标记号码</p>
+                 <p style="margin:6px 0">Mark & No</p>
+            </td>
+            <td width="25%" style="border: 1px solid #000;height: 32px;">
+                 <p style="margin:6px 0">货物名称</p>
+
+                 <p style="margin:6px 0">Description</p>
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                 <p style="margin:6px 0">数量</p>
+
+                 <p style="margin:6px 0">Quantity</p>
+            </td>
+            <td width="10%" style="border: 1px solid #000;height: 32px;">
+                 <p style="margin:6px 0">单位</p>
+
+                 <p style="margin:6px 0">Unit</p>
+            </td>
+            <td width="15%" style="border: 1px solid #000;height: 32px;">
+                 <p style="margin:6px 0">单价</p>
+
+                 <p style="margin:6px 0">Unit price</p>
+            </td>
+            <td style="border: 1px solid #000;height: 32px;">
+                 <p style="margin:6px 0">总金额</p>
+
+                 <p style="margin:6px 0">Amount</p>
+            </td>
+        </tr>
+		<c:set var="count" value="0" scope="request"></c:set>
+		<c:forEach var="orderInfo" items="${detail}"  varStatus="status">
+			<tr>
+					<c:if test="${count == 0}">
+					<td rowspan="20" style="border: 1px solid #000;height: 32px;">
+						<input type="text" style="border: none;" />
+					</td>
+					</c:if>
+					<td style="border: 1px solid #000;height: 32px;">${orderInfo.DESCRIPTION}</td>
+					<td style="border: 1px solid #000;height: 32px;">${orderInfo.QUANTITY}</td>
+					<td style="border: 1px solid #000;height: 32px;">${orderInfo.DECLARINGUNITS}</td>
+					<td style="border: 1px solid #000;height: 32px;">${orderInfo.UNITPRICE}</td>
+					<td style="border: 1px solid #000;height: 32px;">${orderInfo.AMOUNT}</td>
+					<c:set var="count" value="${count+1}" scope="request"></c:set>
+			</tr>
+       </c:forEach>
+	   <c:forEach var="i"  begin="${count}" end="15" step="1">
+	       <tr>
+            <td style="border: 1px solid #000;height: 32px;"></td>
+            <td style="border: 1px solid #000;height: 32px;"></td>
+            <td style="border: 1px solid #000;height: 32px;"></td>
+            <td style="border: 1px solid #000;height: 32px;"></td>
+            <td style="border: 1px solid #000;height: 32px;"></td>
+			 </tr>
+	   </c:forEach>	
+	   </tbody>
+	   <tfoot>
+	   <tr>
+            <td colspan="4" style="height: 40px"></td>
+            <td>USD</td>
+            <td>${order.TOTAL}</td>
+        </tr>
+        </tfoot>
+    </table>
+    <div style="position: absolute;top: 60%;right:15%">
+        <img src="../jsp/print/images/1.png" transcolor="#FFFFFF" />
+        <%-- <img src="<c:url value='/jsp/print/images/1.png' />" transcolor="#FFFFFF" /> --%>
+    </div>
+</div>
